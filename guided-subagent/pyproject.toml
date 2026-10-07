@@ -1,0 +1,16 @@
+[project]
+name = "guided-subagent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "a2a-sdk>=1.2.1",
+    "dotenv>=0.9.9",
+    "fastapi[standard]>=0.142.2",
+    "langchain>=1.4.3",
+    "langchain-google-genai>=4.4.0",
+    "langgraph>=1.2.12",
+    "langsmith>=0.14.3",
+    "typing-extensions>=4.16.0",
+]

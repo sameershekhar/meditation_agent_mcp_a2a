@@ -1,0 +1,49 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: postgres-learning
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_DB: learningdb
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: mcp-server
+    restart: unless-stopped
+
+    depends_on:
+      - postgres
+
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: learningdb
+      DB_USER: postgres
+      DB_PASSWORD: postgres123
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: 8000
+      SSL_CERTFILE: /certs/server.crt
+      SSL_KEYFILE: /certs/server.key
+
+    ports:
+      - "8002:8000"
+
+    volumes:
+      - mcp_certs:/certs
+
+volumes:
+  postgres_data:
+  mcp_certs:
