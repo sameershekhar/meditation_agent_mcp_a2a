@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 
 from agent.graph import meditation_graph
-from agent.nodes import generate_meditation
 from agent.state import MeditationRequest, MeditationState, UserPreferences
 
 load_dotenv()
@@ -35,6 +34,7 @@ async def generate_meditation_endpoint(request: MeditationRequest):
         initial_state = MeditationState(
             user_id=request.user_id,
             current_goal=request.current_goal,
+            session_type=request.session_type,
         )
 
         result = await meditation_graph.ainvoke(initial_state)
@@ -50,6 +50,7 @@ async def generate_meditation_endpoint(request: MeditationRequest):
             "success": True,
             "user_id": result["user_id"],
             "current_goal": result["current_goal"],
+            "selected_agent": result.get("selected_agent"),
             "preferred_duration_minutes": (
                 result["user_preferences"].preferred_duration_minutes
             ),

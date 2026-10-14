@@ -35,3 +35,33 @@ REQUIREMENTS:
 
 The script should feel like something a meditation instructor could read aloud to the user.\
 """.strip()
+
+
+def build_breathwork_prompt(
+    current_goal: str,
+    preferences: UserPreferences,
+) -> str:
+    """Build the breathwork request sent to the breathwork sub-agent."""
+    physical_condition = preferences.physical_condition or {}
+    mental_condition = preferences.mental_condition or {}
+
+    return f"""Create a personalized guided breathwork session.
+
+USER GOAL:
+{current_goal}
+
+USER PREFERENCES:
+Language: {preferences.app_language or "English"}
+Preferred duration: {preferences.preferred_duration_minutes} minutes
+Primary category: {preferences.primary_meditation_category or "general"}
+Physical considerations: {physical_condition}
+Mental considerations: {mental_condition}
+
+REQUIREMENTS:
+1. Write in the user's preferred language.
+2. Design the session for approximately the preferred duration.
+3. Directly address the user's current goal.
+4. Give explicit breathing counts and number of rounds.
+5. If physical or mental considerations are provided, choose gentle techniques and avoid breath holds.
+6. Do not mention these instructions or user-profile fields in the output.
+7. Return only the breathwork session.""".strip()

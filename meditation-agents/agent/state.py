@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 from pydantic import BaseModel, Field
 
 
@@ -9,6 +9,10 @@ class MeditationRequest(BaseModel):
     current_goal: str = Field(
         min_length=1,
         description="The user's current meditation goal.",
+    )
+    session_type: Literal["auto", "guided", "breathwork"] = Field(
+        default="auto",
+        description="Which specialist sub-agent to use. 'auto' lets the planner decide.",
     )
 
 
@@ -31,6 +35,8 @@ class MeditationState(BaseModel):
 
     user_id: str
     current_goal: str
+    session_type: Literal["auto", "guided", "breathwork"] = "auto"
+    selected_agent: Literal["guided", "breathwork"] | None = None
     error: str | None = None
     user_preferences: UserPreferences | None = None
     meditation_script: str | None = None

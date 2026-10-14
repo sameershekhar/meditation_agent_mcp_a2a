@@ -1,0 +1,45 @@
+{
+    "name": "Breathwork-Agent",
+    "description": "A specialist agent that creates guided breathwork sessions with techniques, counts and rounds tailored to a user's request.",
+    "version": "1.0.0",
+    "default_input_modes": [
+        "text/plain"
+    ],
+    "default_output_modes": [
+        "text/plain"
+    ],
+    "capabilities": {
+        "streaming": true
+    },
+    "supported_interfaces": [
+        {
+            "protocol_binding": "JSONRPC",
+            "url": "http://127.0.0.1:9003/",
+            "protocol_version": "1.0"
+        }
+    ],
+    "skills": [
+        {
+            "id": "breathwork",
+            "name": "Breathwork",
+            "description": "Creates guided breathwork sessions (box breathing, 4-7-8, coherent breathing, extended exhale and more) for calm, focus, energy, sleep and stress relief.",
+            "tags": [
+                "breathwork",
+                "breathing",
+                "pranayama",
+                "relaxation"
+            ],
+            "input_modes": [
+                "text/plain"
+            ],
+            "output_modes": [
+                "text/plain"
+            ],
+            "examples": [
+                "Give me a 5 minute breathing exercise to calm anxiety.",
+                "I need a breathwork session to fall asleep.",
+                "Teach me box breathing for focus before a meeting."
+            ]
+        }
+    ]
+}
