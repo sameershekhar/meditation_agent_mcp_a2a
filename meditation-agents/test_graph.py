@@ -32,7 +32,7 @@ async def test_graph():
         """
 
         with patch(
-            "agent.gemini.GeminiMeditationGenerator.generate",
+            "a2a_client.guided_agent_client.GuidedAgentClient.generate_meditation",
             new_callable=AsyncMock,
             return_value=mock_script,
         ):

@@ -5,6 +5,7 @@ description = "LangGraph meditation agent using a remote MCP preference server a
 requires-python = ">=3.14"
 
 dependencies = [
+    "a2a-sdk>=1.2.1",
     "fastapi>=0.115",
     "google-genai>=1.0",
     "langgraph>=0.6",
